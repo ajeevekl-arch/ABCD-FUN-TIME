@@ -1,0 +1,3 @@
+<resources>
+<style name="Theme.ABCFunTime" parent="Theme.AppCompat.Light.NoActionBar"><item name="android:fontFamily">sans</item><item name="android:colorAccent">#FF6B6B</item><item name="android:statusBarColor">#FFFFFF</item><item name="android:navigationBarColor">#FFFFFF</item><item name="android:windowLightStatusBar">true</item></style>
+</resources>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>ABC FUN TIME</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eaf7ff,#fff8d9);color:#18324a;overflow:hidden}
+.header{height:12vh;min-height:62px;display:flex;align-items:center;justify-content:center;gap:14px;font-weight:900;font-size:clamp(24px,4vw,46px);text-shadow:0 2px 0 #fff;position:relative}
+.header:before{content:'⭐';font-size:.7em}.header:after{content:'⭐';font-size:.7em}
+.screen{height:88vh;padding:1vh 2vw 2vh;overflow:auto}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;max-width:1100px;margin:0 auto;padding-bottom:20px}
+.card{border:0;border-radius:18px;min-height:82px;background:#fff;box-shadow:0 5px 12px rgba(35,73,105,.16);font-size:clamp(24px,3vw,38px);font-weight:900;color:#1565c0;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.card:active{transform:scale(.96);box-shadow:0 2px 6px rgba(35,73,105,.2)}
+.card.az{grid-column:span 7;color:#d84315;background:#fff3e8}
+.player{display:none;height:100%;flex-direction:column;gap:8px}.top{display:flex;align-items:center;justify-content:space-between;height:54px}.title{font-size:clamp(22px,3vw,34px);font-weight:900}.back{border:0;border-radius:14px;padding:10px 18px;background:#1565c0;color:white;font-size:18px;font-weight:800}.frame{flex:1;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 4px 14px rgba(0,0,0,.2)}iframe{width:100%;height:100%;border:0}
+@media(max-width:800px){.grid{grid-template-columns:repeat(6,1fr)}.card.az{grid-column:span 6}}
+</style></head>
+<body>
+<div id="home" class="screen"><div class="header">ABC FUN TIME</div><div id="grid" class="grid"></div></div>
+<div id="player" class="screen player"><div class="top"><div id="title" class="title"></div><button class="back" onclick="showHome()">← Back</button></div><div class="frame"><iframe id="yt" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>
+<script>
+const playlists=[
+['A','PLTu-bhKA_lxk'],['B','PLRrptvmuC8ws'],['C','PLIC-7ouA-DA4'],['D','PLOTkCX-oYyKg'],['E','PLFTtVUtCiNDk'],['F','PLO4-gej4Z4Es'],['G','PLGi2rnmbQVv8'],['H','PLSr4yyaxc1qA'],['I','PLH_jO30NZHUE'],['J','PLOVS4nE1Llx8'],['K','PLLMdx2AVSJBI'],['L','PLDqscNhavHW4'],['M','PLHkqu_82EXE8'],['N','PLVzAatz7QavM'],['O','PLHrN8TPftQ9E'],['P','PLDQG7simh0yw'],['Q','PLV-hL-Jb-N9g'],['R','PLA9-0zDhq2DA'],['S','PLOaRNjZ339dc'],['T','PLIE5PZcQuhag'],['U','PLRawxMyUkUU0'],['V','PLOQ9-XqZMKIc'],['W','PLJhlmwxP1lJs'],['X','PLNueMsBDHJpg'],['Y','PLdwLRqOurGLk'],['Z','PLe2UAaAZg5ZM'],['A-Z','PLGhUYnpXM3Yw']
+];
+const grid=document.getElementById('grid');
+playlists.forEach(([name,id])=>{const b=document.createElement('button');b.className='card'+(name==='A-Z'?' az':'');b.textContent=name;b.onclick=()=>openPlaylist(name,id);grid.appendChild(b)});
+function openPlaylist(name,id){document.getElementById('home').style.display='none';document.getElementById('player').style.display='flex';document.getElementById('title').textContent=name==='A-Z'?'A-Z Playlist':name+' Playlist';document.getElementById('yt').src='https://www.youtube.com/embed/videoseries?list='+encodeURIComponent(id)+'&rel=0';}
+function showHome(){document.getElementById('yt').src='';document.getElementById('player').style.display='none';document.getElementById('home').style.display='block'}
+</script></body></html>
