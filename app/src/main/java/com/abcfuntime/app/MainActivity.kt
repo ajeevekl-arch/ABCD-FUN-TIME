@@ -1,7 +1,6 @@
 package com.abcfuntime.app
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
@@ -27,18 +26,19 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         webView = findViewById(R.id.webView)
 
+        WebView.setWebContentsDebuggingEnabled(false)
         webView.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
             mediaPlaybackRequiresUserGesture = false
             cacheMode = WebSettings.LOAD_DEFAULT
+            mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
             setSupportZoom(false)
             builtInZoomControls = false
             displayZoomControls = false
         }
 
         webView.webViewClient = WebViewClient()
-
         webView.webChromeClient = object : WebChromeClient() {
             override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
                 if (customView != null) {
@@ -78,7 +78,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            webView.loadUrl("file:///android_asset/index.html")
+            // YouTube requires an HTTP Referer for embedded playback. Loading the
+            // bundled HTML with an HTTPS base URL gives the iframe a valid referrer.
+            val html = assets.open("index.html").bufferedReader(Charsets.UTF_8).use { it.readText() }
+            webView.loadDataWithBaseURL(
+                "https://com.abcfuntime.app/",
+                html,
+                "text/html",
+                "UTF-8",
+                null
+            )
         } else {
             webView.restoreState(savedInstanceState)
         }

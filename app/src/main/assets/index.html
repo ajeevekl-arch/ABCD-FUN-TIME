@@ -6,25 +6,34 @@
 <title>ABC FUN TIME</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eaf7ff,#fff8d9);color:#18324a;overflow:hidden}
-.header{height:12vh;min-height:62px;display:flex;align-items:center;justify-content:center;gap:14px;font-weight:900;font-size:clamp(24px,4vw,46px);text-shadow:0 2px 0 #fff;position:relative}
-.header:before{content:'⭐';font-size:.7em}.header:after{content:'⭐';font-size:.7em}
-.screen{height:88vh;padding:1vh 2vw 2vh;overflow:auto}
-.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;max-width:1100px;margin:0 auto;padding-bottom:20px}
-.card{border:0;border-radius:18px;min-height:82px;background:#fff;box-shadow:0 5px 12px rgba(35,73,105,.16);font-size:clamp(24px,3vw,38px);font-weight:900;color:#1565c0;cursor:pointer;transition:transform .12s,box-shadow .12s}
-.card:active{transform:scale(.96);box-shadow:0 2px 6px rgba(35,73,105,.2)}
-.card.az{grid-column:span 7;color:#d84315;background:#fff3e8}
-.player{display:none;height:100%;flex-direction:column;gap:8px}.top{display:flex;align-items:center;justify-content:space-between;height:54px}.title{font-size:clamp(22px,3vw,34px);font-weight:900}.back{border:0;border-radius:14px;padding:10px 18px;background:#1565c0;color:white;font-size:18px;font-weight:800}.frame{flex:1;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 4px 14px rgba(0,0,0,.2)}iframe{width:100%;height:100%;border:0}
-@media(max-width:800px){.grid{grid-template-columns:repeat(6,1fr)}.card.az{grid-column:span 6}}
+.header{height:12vh;min-height:62px;display:flex;align-items:center;justify-content:center;gap:14px;font-weight:900;font-size:clamp(24px,4vw,46px);text-shadow:0 2px 0 #fff;position:relative}.header:before{content:'⭐';font-size:.7em}.header:after{content:'⭐';font-size:.7em}
+.screen{height:88vh;padding:1vh 2vw 2vh;overflow:auto}.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;max-width:1100px;margin:0 auto;padding-bottom:20px}.card{border:0;border-radius:18px;min-height:82px;background:#fff;box-shadow:0 5px 12px rgba(35,73,105,.16);font-size:clamp(24px,3vw,38px);font-weight:900;color:#1565c0;cursor:pointer}.card:active{transform:scale(.96)}.card.az{grid-column:span 7;color:#d84315;background:#fff3e8}
+.player{display:none;height:100%;flex-direction:column;gap:8px}.top{display:flex;align-items:center;justify-content:center;height:54px}.title{font-size:clamp(22px,3vw,34px);font-weight:900}.playerArea{flex:1;min-height:0;display:flex;gap:12px}.frame{flex:1;min-width:0;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 4px 14px rgba(0,0,0,.2)}iframe{width:100%;height:100%;border:0}.videoList{width:31%;min-width:260px;overflow-y:auto;background:rgba(255,255,255,.9);border-radius:16px;padding:8px;box-shadow:0 4px 14px rgba(0,0,0,.12)}.videoItem{display:flex;gap:9px;width:100%;padding:7px;margin:0 0 7px;border:0;border-radius:12px;background:#fff;text-align:left;cursor:pointer;box-shadow:0 2px 7px rgba(35,73,105,.12)}.videoItem.active{outline:3px solid #1565c0}.thumb{width:120px;height:68px;object-fit:cover;border-radius:8px;background:#ddd;flex:none}.videoText{font-size:14px;font-weight:800;line-height:1.25;color:#18324a;padding-top:4px}.empty{padding:20px;text-align:center;font-weight:700;color:#5d7182}
+@media(max-width:800px){.grid{grid-template-columns:repeat(6,1fr)}.card.az{grid-column:span 6}.playerArea{flex-direction:column}.frame{height:55%;flex:none}.videoList{width:100%;min-width:0;flex:1}.thumb{width:105px;height:59px}}
 </style></head>
 <body>
 <div id="home" class="screen"><div class="header">ABC FUN TIME</div><div id="grid" class="grid"></div></div>
-<div id="player" class="screen player"><div class="top"><div id="title" class="title"></div><button class="back" onclick="showHome()">← Back</button></div><div class="frame"><iframe id="yt" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>
+<div id="player" class="screen player">
+  <div class="top"><div id="title" class="title"></div></div>
+  <div class="playerArea"><div class="frame"><iframe id="yt" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div id="videoList" class="videoList"><div class="empty">Loading playlist…</div></div></div>
+</div>
 <script>
 const playlists=[
 ['A','PLTu-bhKA_lxk'],['B','PLRrptvmuC8ws'],['C','PLIC-7ouA-DA4'],['D','PLOTkCX-oYyKg'],['E','PLFTtVUtCiNDk'],['F','PLO4-gej4Z4Es'],['G','PLGi2rnmbQVv8'],['H','PLSr4yyaxc1qA'],['I','PLH_jO30NZHUE'],['J','PLOVS4nE1Llx8'],['K','PLLMdx2AVSJBI'],['L','PLDqscNhavHW4'],['M','PLHkqu_82EXE8'],['N','PLVzAatz7QavM'],['O','PLHrN8TPftQ9E'],['P','PLDQG7simh0yw'],['Q','PLV-hL-Jb-N9g'],['R','PLA9-0zDhq2DA'],['S','PLOaRNjZ339dc'],['T','PLIE5PZcQuhag'],['U','PLRawxMyUkUU0'],['V','PLOQ9-XqZMKIc'],['W','PLJhlmwxP1lJs'],['X','PLNueMsBDHJpg'],['Y','PLdwLRqOurGLk'],['Z','PLe2UAaAZg5ZM'],['A-Z','PLGhUYnpXM3Yw']
 ];
-const grid=document.getElementById('grid');
+const grid=document.getElementById('grid'), yt=document.getElementById('yt'), videoList=document.getElementById('videoList');
+let player=null,currentPlaylist=[],currentIndex=-1;
 playlists.forEach(([name,id])=>{const b=document.createElement('button');b.className='card'+(name==='A-Z'?' az':'');b.textContent=name;b.onclick=()=>openPlaylist(name,id);grid.appendChild(b)});
-function openPlaylist(name,id){document.getElementById('home').style.display='none';document.getElementById('player').style.display='flex';document.getElementById('title').textContent=name==='A-Z'?'A-Z Playlist':name+' Playlist';document.getElementById('yt').src='https://www.youtube.com/embed/videoseries?list='+encodeURIComponent(id)+'&rel=0';}
-function showHome(){document.getElementById('yt').src='';document.getElementById('player').style.display='none';document.getElementById('home').style.display='block'}
+function openPlaylist(name,id){document.getElementById('home').style.display='none';document.getElementById('player').style.display='flex';document.getElementById('title').textContent=name==='A-Z'?'A-Z Playlist':name+' Playlist';videoList.innerHTML='<div class="empty">Loading playlist…</div>';currentPlaylist=[];currentIndex=-1;
+ const params='list='+encodeURIComponent(id)+'&enablejsapi=1&origin='+encodeURIComponent('https://com.abcfuntime.app')+'&rel=0';
+ yt.src='https://www.youtube-nocookie.com/embed/videoseries?'+params;
+ loadYouTubeApi();
+}
+function loadYouTubeApi(){if(window.YT&&YT.Player){initPlayer();return}if(document.getElementById('yt-api'))return;const s=document.createElement('script');s.id='yt-api';s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s)}
+window.onYouTubeIframeAPIReady=()=>initPlayer();
+function initPlayer(){if(player){try{player.destroy()}catch(e){}} player=new YT.Player('yt',{events:{onReady:syncPlaylist,onStateChange:onStateChange,onError:()=>{videoList.innerHTML='<div class="empty">This video cannot be played in the embedded player.</div>'}}});}
+function syncPlaylist(){setTimeout(()=>{try{currentPlaylist=player.getPlaylist()||[];renderVideoList();}catch(e){videoList.innerHTML='<div class="empty">Playlist is loading…</div>';setTimeout(syncPlaylist,1200)}},700)}
+function renderVideoList(){videoList.innerHTML='';if(!currentPlaylist.length){videoList.innerHTML='<div class="empty">No videos found in this playlist.</div>';return}currentPlaylist.forEach((id,i)=>{const b=document.createElement('button');b.className='videoItem'+(i===currentIndex?' active':'');b.innerHTML='<img class="thumb" src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt=""><div class="videoText">Video '+(i+1)+'</div>';b.onclick=()=>{currentIndex=i;player.playVideoAt(i);renderVideoList()};videoList.appendChild(b)})}
+function onStateChange(e){if(e.data===1){try{const data=player.getVideoData();const id=data.video_id;currentIndex=currentPlaylist.indexOf(id);renderVideoList()}catch(_){} }}
+function showHome(){yt.src='';if(player){try{player.destroy()}catch(e){}}player=null;currentPlaylist=[];videoList.innerHTML='';document.getElementById('player').style.display='none';document.getElementById('home').style.display='block'}
 </script></body></html>
